@@ -97,5 +97,32 @@
         });
     </script>
 
+<script>
+        document.getElementById('idbutton').addEventListener('click', function() {
+            
+            const inputValue = document.getElementById('userInput').value;
+            
+            if (inputValue.trim() !== "") {
+                // 1. Send the HTTP POST Request using Axios
+                axios.post('http://143.198.38.161:3000/submit', {
+                    // Send the data as a simple JSON object
+                    worst_thing: inputValue
+                })
+                .then(response => {
+                    // Success handler
+                    alert('Submission received by server! Status: ' + response.data.message);
+                    // Clear the input field
+                    document.getElementById('userInput').value = '';
+                })
+                .catch(error => {
+                    // Error handler
+                    console.error('There was an error sending the data:', error);
+                    alert('Submission failed. Check the console for details.');
+                });
+            } else {
+                alert("Please enter a value before submitting.");
+            }
+        });
+    </script>
 </body>
 </html>
